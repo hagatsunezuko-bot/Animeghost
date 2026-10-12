@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nezuko — Pink Video Collection</title>
+<style>
+:root{--pink:#ff4fa3;--hot:#ed2d87;--pale:#fff0f7;--ink:#54223c;--muted:#9a6d83;--card:#ffffffdc}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:var(--ink);background:linear-gradient(135deg,#fff5fa,#ffe3f0 45%,#fff8fc);min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.22;background-image:radial-gradient(#ff80ba 1px,transparent 1px);background-size:23px 23px}
+.petal{position:fixed;top:-35px;z-index:0;pointer-events:none;font-size:18px;animation:fall linear infinite;filter:drop-shadow(0 3px 3px #ff8ab533)}
+@keyframes fall{to{transform:translate3d(var(--drift),110vh,0) rotate(420deg)}}
+header,main,footer{position:relative;z-index:1}
+header{padding:30px 18px 20px;text-align:center}
+.logo-wrap{display:inline-block;position:relative}
+h1{font-family:Georgia,serif;font-size:clamp(3rem,9vw,5.5rem);letter-spacing:2px;line-height:1;margin:10px 0;color:var(--pink);text-shadow:0 4px 0 #ffc6e0,0 10px 28px #ff4fa344}
+.logo-flower{position:absolute;font-size:2rem;animation:bob 2.4s ease-in-out infinite}
+.logo-flower.a{left:-42px;top:0}.logo-flower.b{right:-42px;bottom:0;animation-delay:.7s}
+@keyframes bob{50%{transform:translateY(-8px) rotate(12deg)}}
+.tagline{color:var(--muted);margin:10px 0 22px}
+.topbar{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;align-items:center}
+input,select,button{font:inherit}
+.search{width:min(620px,92vw);display:flex;background:white;border:1px solid #ffc1dd;border-radius:999px;padding:6px;box-shadow:0 8px 25px #c93e8115}
+.search input{flex:1;min-width:0;border:0;outline:0;padding:10px 15px;background:transparent;color:var(--ink)}
+button{border:0;border-radius:999px;padding:10px 16px;background:var(--pink);color:white;font-weight:700;cursor:pointer;transition:.18s}
+button:hover{background:var(--hot);transform:translateY(-1px)}
+button.secondary{background:white;color:var(--hot);border:1px solid #ffc1dd}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none}
+main{max-width:1120px;margin:auto;padding:0 18px 42px}
+.toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:12px 0 18px}
+.pill{background:#fff;border:1px solid #ffd1e5;padding:9px 14px;border-radius:999px;color:var(--muted);font-size:.92rem}
+h2{color:#d52d7b;margin:22px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:17px}
+.card{background:var(--card);border:1px solid #ffd0e5;border-radius:20px;overflow:hidden;box-shadow:0 10px 30px #a22a5c0b;backdrop-filter:blur(8px)}
+.thumb{height:145px;background:linear-gradient(135deg,#ffc3df,#ffe9f4);display:grid;place-items:center;font-size:3rem;color:white;position:relative}
+.thumb:after{content:"✿";position:absolute;right:13px;top:8px;color:#fff9;font-size:1.6rem}
+.card-body{padding:14px}
+.card h3{margin:0 0 6px;font-size:1.05rem;overflow-wrap:anywhere}
+.meta{font-size:.85rem;color:var(--muted);margin-bottom:12px}
+.card-actions{display:flex;gap:8px;flex-wrap:wrap}
+.card-actions button{font-size:.88rem;padding:9px 12px}
+.empty{padding:40px 18px;text-align:center;background:#ffffffa8;border:1px dashed #f5a8ce;border-radius:20px;color:var(--muted)}
+.empty strong{display:block;font-size:1.25rem;color:#d52d7b;margin-bottom:6px}
+.panel{background:#ffffffdf;border:1px solid #ffd0e5;border-radius:20px;padding:18px;margin:18px 0;box-shadow:0 8px 28px #a22a5c0b}
+.panel h2{margin-top:0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-size:.9rem;color:var(--muted);font-weight:650}
+.field input,.field select{border:1px solid #f4b5d3;border-radius:12px;padding:11px;background:white;color:var(--ink);width:100%}
+.help{font-size:.84rem;color:var(--muted);line-height:1.5}
+.notice{background:#fff3f9;border:1px solid #ffd0e5;border-radius:12px;padding:11px 13px;font-size:.9rem;margin:12px 0}
+.hidden{display:none!important}
+.username{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+footer{text-align:center;color:var(--muted);padding:12px 18px 28px;font-size:.85rem}
+dialog{border:1px solid #ffc1dd;border-radius:20px;max-width:560px;width:calc(100% - 28px);padding:0;color:var(--ink);box-shadow:0 25px 80px #6c164455}
+dialog::backdrop{background:#4b183766;backdrop-filter:blur(4px)}
+.modal-head{padding:18px 20px;background:#fff0f7;display:flex;justify-content:space-between;align-items:center}
+.modal-body{padding:20px}
+.modal-head h2{margin:0}
+.close{background:white;color:var(--hot);border:1px solid #ffc1dd;padding:6px 12px}
+.video-wrap video{width:100%;max-height:60vh;background:#25121d;border-radius:12px}
+@media(max-width:560px){header{padding-top:22px}.logo-flower.a{left:-28px}.logo-flower.b{right:-28px}.toolbar{align-items:flex-start}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo-wrap"><span class="logo-flower a">🌸</span><h1>Nezuko</h1><span class="logo-flower b">✿</span></div>
+  <p class="tagline">A little pink corner for your favorite videos ♡</p>
+  <div class="topbar">
+    <div class="search"><input id="searchInput" type="search" placeholder="Search videos..." aria-label="Search videos"><button id="searchBtn">Search</button></div>
+  </div>
+</header>
+<main>
+  <div class="toolbar">
+    <div class="username"><span class="pill">Watching as <strong id="currentUser">Guest</strong></span><button class="secondary" id="usernameBtn">Set username</button></div>
+    <div class="username"><button id="adminBtn">Admin upload</button></div>
+  </div>
+  <section>
+    <h2 id="collectionTitle">Video collection ✨</h2>
+    <div id="videoGrid" class="grid"></div>
+    <div id="emptyState" class="empty hidden"><strong>No collection 🌷</strong>No videos matched your search. Try another title, or check back when the collection has videos.</div>
+  </section>
+  <section class="panel">
+    <h2>Recently watched ♡</h2>
+    <p class="help">Your watch history is saved on this device in this browser.</p>
+    <div id="historyGrid" class="grid"></div>
+    <div id="historyEmpty" class="empty">You haven't watched any videos yet.</div>
+  </section>
+  <section id="adminPanel" class="panel hidden">
+    <h2>Admin studio 🌸</h2>
+    <p class="help">Upload a separate file for each quality you want to offer. Example: add the 720p version and then add the same video again as 1080p.</p>
+    <div class="notice"><strong>Demo security note:</strong> This is a single-file, browser-only website. The admin PIN is a convenience lock, not secure authentication. Anyone who can inspect the file can discover or bypass it. For a public website, use a server with protected admin access and real video storage.</div>
+    <form id="uploadForm">
+      <div class="form-grid">
+        <div class="field"><label for="videoTitle">Video title</label><input id="videoTitle" required maxlength="100" placeholder="My video"></div>
+        <div class="field"><label for="videoQuality">Quality for this file</label><select id="videoQuality"><option value="320p">320p</option><option value="460p">460p</option><option value="720p">720p</option><option value="1080p">1080p</option></select></div>
+        <div class="field"><label for="videoFile">Video file</label><input id="videoFile" type="file" accept="video/*" required></div>
+      </div>
+      <p class="help">Supported formats depend on the browser. Large videos use browser storage and may exceed available space.</p>
+      <button type="submit" id="uploadSubmit">Upload video</button>
+    </form>
+    <hr style="border:0;border-top:1px solid #ffd0e5;margin:20px 0">
+    <h3>Manage collection</h3><div id="manageGrid" class="grid"></div>
+  </section>
+</main>
+<footer>Made with petals and pink dreams 🌸 · Nezuko</footer>
+
+<dialog id="pinDialog">
+  <div class="modal-head"><h2>Admin access</h2><button class="close" data-close="pinDialog">✕</button></div>
+  <div class="modal-body"><p>Enter the admin PIN to open the upload studio.</p><div class="field"><label for="adminPin">Admin PIN</label><input id="adminPin" type="password" inputmode="numeric" autocomplete="off" placeholder="Enter PIN"></div><p class="help">Default demo PIN: <strong>2468</strong>. Change ADMIN_PIN in this HTML file before sharing it (this still won't make browser-only protection secure).</p><p id="pinError" style="color:#d52d7b"></p><button id="pinSubmit">Unlock studio</button></div>
+</dialog>
+<dialog id="userDialog">
+  <div class="modal-head"><h2>Your username</h2><button class="close" data-close="userDialog">✕</button></div>
+  <div class="modal-body"><p>Choose a name to show on Nezuko. No account or login is required.</p><div class="field"><label for="usernameInput">Username</label><input id="usernameInput" maxlength="24" placeholder="PinkPetal"></div><p class="help" id="usernameHelp">You can change your username twice per calendar month on this device.</p><p id="userError" style="color:#d52d7b"></p><button id="saveUsername">Save username</button></div>
+</dialog>
+<dialog id="playerDialog">
+  <div class="modal-head"><h2 id="playerTitle">Now playing</h2><button class="close" data-close="playerDialog">✕</button></div>
+  <div class="modal-body"><div class="video-wrap"><video id="player" controls playsinline></video></div><p class="help">Choose a download quality below. Only qualities uploaded by the admin are available.</p><div id="downloadChoices" class="card-actions"></div></div>
+</dialog>
+<script>
+/* Demo-only PIN. A front-end PIN cannot secure an actual public admin area. */
+const ADMIN_PIN = "2468";
+const DB_NAME = "NezukoVideoDB", DB_VERSION = 1, STORE = "videos";
+const $ = id => document.getElementById(id);
+let db, currentPlayingId = null, currentObjectUrl = null, searchTerm = "";
+
+function openDB(){return new Promise((resolve,reject)=>{const req=indexedDB.open(DB_NAME,DB_VERSION);req.onupgradeneeded=()=>{const d=req.result;if(!d.objectStoreNames.contains(STORE))d.createObjectStore(STORE,{keyPath:"id"});};req.onsuccess=()=>resolve(req.result);req.onerror=()=>reject(req.error);});}
+function allVideos(){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readonly"),req=tx.objectStore(STORE).getAll();req.onsuccess=()=>resolve(req.result.sort((a,b)=>b.addedAt-a.addedAt));req.onerror=()=>reject(req.error);});}
+function saveVideo(v){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).put(v);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
+function deleteVideo(id){return new Promise((resolve,reject)=>{const tx=db.transaction(STORE,"readwrite");tx.objectStore(STORE).delete(id);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error);});}
+function grouped(videos){const map=new Map();for(const v of videos){const key=v.title.trim().toLowerCase();if(!map.has(key))map.set(key,{title:v.title,items:[]});map.get(key).items.push(v);}return [...map.values()].map(g=>({...g,items:g.items.sort((a,b)=>qualityNum(b.quality)-qualityNum(a.quality))}));}
+function qualityNum(q){return parseInt(q,10)||0}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function getHistory(){try{return JSON.parse(localStorage.getItem("nezuko_history")||"[]")}catch{return []}}
+function setHistory(h){localStorage.setItem("nezuko_history",JSON.stringify(h.slice(0,30)))}
+function getUsername(){return localStorage.getItem("nezuko_username")||"Guest"}
+function getMonthKey(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")}
+function updateUserUI(){$("currentUser").textContent=getUsername();}
+function formatSize(bytes){if(!bytes)return "";const units=["B","KB","MB","GB"];let i=0,n=bytes;while(n>=1024&&i<3){n/=1024;i++}return n.toFixed(i?1:0)+" "+units[i]}
+function makeCard(group,history=false){
+ const first=group.items[0],card=document.createElement("article");card.className="card";
+ const qualities=group.items.map(v=>v.quality).filter((q,i,a)=>a.indexOf(q)===i);
+ card.innerHTML=`<div class="thumb">▶</div><div class="card-body"><h3>${esc(group.title)}</h3><div class="meta">${qualities.join(" · ")}${first.size?" · "+formatSize(first.size):""}</div><div class="card-actions"><button data-play="${esc(first.id)}">Watch</button><button class="secondary" data-download-group="${esc(first.id)}">Download</button></div></div>`;
+ return card;
+}
+function renderGroupInto(container,groups){container.innerHTML="";for(const g of groups)container.appendChild(makeCard(g));}
+async function render(){
+ const videos=await allVideos(), groups=grouped(videos);
+ const filtered=groups.filter(g=>g.title.toLowerCase().includes(searchTerm.toLowerCase()));
+ $("collectionTitle").textContent=searchTerm?`Search results for “${searchTerm}” 🌸`:"Video collection ✨";
+ renderGroupInto($("videoGrid"),filtered);
+ $("emptyState").classList.toggle("hidden",filtered.length!==0);
+ const history=getHistory(), historyGroups=[];
+ for(const h of history){const found=groups.find(g=>g.items.some(v=>v.id===h.id)||g.title.toLowerCase()===h.title.toLowerCase());if(found&&!historyGroups.some(x=>x.title.toLowerCase()===found.title.toLowerCase()))historyGroups.push(found);}
+ renderGroupInto($("historyGrid"),historyGroups);
+ $("historyEmpty").classList.toggle("hidden",historyGroups.length>0);
+ const manage=$("manageGrid");manage.innerHTML="";
+ for(const g of groups){const c=document.createElement("article");c.className="card";c.innerHTML=`<div class="card-body"><h3>${esc(g.title)}</h3><div class="meta">${g.items.map(v=>esc(v.quality)).join(" · ")}</div><div class="card-actions">${g.items.map(v=>`<button class="secondary" data-delete="${esc(v.id)}">Delete ${esc(v.quality)}</button>`).join("")}</div></div>`;manage.appendChild(c);}
+}
+async function startVideo(id){
+ const videos=await allVideos(), v=videos.find(x=>x.id===id);if(!v)return;
+ const siblings=videos.filter(x=>x.title.toLowerCase()===v.title.toLowerCase()).sort((a,b)=>qualityNum(b.quality)-qualityNum(a.quality));
+ currentPlayingId=id;
+ if(currentObjectUrl)URL.revokeObjectURL(currentObjectUrl);
+ currentObjectUrl=URL.createObjectURL(v.blob);$("player").src=currentObjectUrl;$("playerTitle").textContent=v.title;
+ const choices=$("downloadChoices");choices.innerHTML="";
+ for(const item of siblings){const btn=document.createElement("button");btn.textContent="Download "+item.quality;btn.addEventListener("click",()=>downloadVideo(item));choices.appendChild(btn);}
+ $("playerDialog").showModal();
+ const h=getHistory().filter(x=>x.id!==v.id);h.unshift({id:v.id,title:v.title,at:Date.now()});setHistory(h);
+ await render();
+}
+function downloadVideo(v){const url=URL.createObjectURL(v.blob),a=document.createElement("a");a.href=url;a.download=(v.title.replace(/[^\w\- ]/g,"").trim()||"nezuko-video")+"-"+v.quality+"."+((v.name||"video.mp4").split(".").pop()||"mp4");document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);}
+function openDialog(id){$(id).showModal()}
+document.addEventListener("click",async e=>{
+ const play=e.target.closest("[data-play]");if(play)startVideo(play.dataset.play);
+ const dl=e.target.closest("[data-download-group]");if(dl){const videos=await allVideos(),v=videos.find(x=>x.id===dl.dataset.downloadGroup);if(v)startVideo(v.id);}
+ const del=e.target.closest("[data-delete]");if(del){if(confirm("Delete this uploaded quality?")){await deleteVideo(del.dataset.delete);await render();}}
+ const close=e.target.closest("[data-close]");if(close)$(close.dataset.close).close();
+});
+$("searchBtn").addEventListener("click",()=>{searchTerm=$("searchInput").value.trim();render()});
+$("searchInput").addEventListener("keydown",e=>{if(e.key==="Enter"){searchTerm=e.target.value.trim();render()}});
+$("searchInput").addEventListener("input",e=>{if(!e.target.value.trim()){searchTerm="";render()}});
+$("adminBtn").addEventListener("click",()=>{ $("adminPin").value="";$("pinError").textContent="";openDialog("pinDialog")});
+$("pinSubmit").addEventListener("click",()=>{if($("adminPin").value===ADMIN_PIN){$("pinDialog").close();$("adminPanel").classList.remove("hidden");$("adminPanel").scrollIntoView({behavior:"smooth"});}else $("pinError").textContent="That PIN didn't match. Try again."});
+$("adminPin").addEventListener("keydown",e=>{if(e.key==="Enter")$("pinSubmit").click()});
+$("usernameBtn").addEventListener("click",()=>{
+ $("usernameInput").value=getUsername()==="Guest"?"":getUsername();$("userError").textContent="";
+ const count=JSON.parse(localStorage.getItem("nezuko_name_changes")||"{}"),key=getMonthKey();
+ $("usernameHelp").textContent=`Changes used this month: ${count[key]||0} of 2. You can change your username twice per calendar month on this device.`;
+ openDialog("userDialog");
+});
+$("saveUsername").addEventListener("click",()=>{
+ const name=$("usernameInput").value.trim(),old=getUsername();
+ if(!name||name.length>24){$("userError").textContent="Enter a username with 1–24 characters.";return}
+ if(name===old){$("userDialog").close();return}
+ const counts=JSON.parse(localStorage.getItem("nezuko_name_changes")||"{}"),key=getMonthKey();
+ if((counts[key]||0)>=2){$("userError").textContent="You've used both username changes for this month. Try again next month.";return}
+ counts[key]=(counts[key]||0)+1;localStorage.setItem("nezuko_name_changes",JSON.stringify(counts));localStorage.setItem("nezuko_username",name);
+ updateUserUI();$("userDialog").close();
+});
+$("uploadForm").addEventListener("submit",async e=>{
+ e.preventDefault();const file=$("videoFile").files[0],title=$("videoTitle").value.trim(),quality=$("videoQuality").value;if(!file||!title)return;
+ const btn=$("uploadSubmit");btn.disabled=true;btn.textContent="Uploading…";
+ try{
+   await saveVideo({id:crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random(),title,quality,blob:file,name:file.name,size:file.size,type:file.type,addedAt:Date.now()});
+   $("uploadForm").reset();await render();alert("Video uploaded to this browser's local collection.");
+ }catch(err){alert("Upload failed. Browser storage may be full or the file may be too large.");}
+ finally{btn.disabled=false;btn.textContent="Upload video";}
+});
+$("playerDialog").addEventListener("close",()=>{ $("player").pause();$("player").removeAttribute("src");$("player").load();if(currentObjectUrl){URL.revokeObjectURL(currentObjectUrl);currentObjectUrl=null;}});
+for(let i=0;i<18;i++){const p=document.createElement("div");p.className="petal";p.textContent=["🌸","✿","❀","🌷"][Math.floor(Math.random()*4)];p.style.left=Math.random()*100+"vw";p.style.animationDuration=(9+Math.random()*13)+"s";p.style.animationDelay=(-Math.random()*20)+"s";p.style.setProperty("--drift",(Math.random()*180-90)+"px");p.style.fontSize=(13+Math.random()*15)+"px";document.body.appendChild(p);}
+(async()=>{try{db=await openDB();updateUserUI();await render();}catch(e){$("videoGrid").innerHTML='<div class="empty">Your browser does not support local video storage. Try a modern browser.</div>'}})();
+</script>
+</body>
+</html>
